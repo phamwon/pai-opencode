@@ -3,5 +3,13 @@
   "theme": "dark",
   "model": "anthropic/claude-sonnet-4-5",
   "snapshot": true,
-  "username": "User"
+  "username": "User",
+  "mode": {
+    "build": {
+      "prompt": "You are Claude Code, Anthropic's official CLI for Claude."
+    },
+    "plan": {
+      "prompt": "You are Claude Code, Anthropic's official CLI for Claude."
+    }
+  }
 }
