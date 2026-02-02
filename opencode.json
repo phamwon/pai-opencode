@@ -4,6 +4,14 @@
   "model": "anthropic/claude-sonnet-4-5",
   "snapshot": true,
   "username": "User",
+  "permission": {
+    "*": "allow",
+    "websearch": "allow",
+    "codesearch": "allow",
+    "webfetch": "allow",
+    "doom_loop": "ask",
+    "external_directory": "ask"
+  },
   "mode": {
     "build": {
       "prompt": "You are Claude Code, Anthropic's official CLI for Claude."
