@@ -1,10 +1,10 @@
 /**
  * PAI-OpenCode Context Loader
  *
- * Loads CORE skill context for injection into chat system.
+ * Loads PAI skill context for injection into chat system.
  * Equivalent to PAI's load-core-context.ts hook.
  *
- * Compatible with PAI v2.4 (The Algorithm embedded in CORE).
+ * Compatible with PAI v2.4 (The Algorithm embedded in PAI).
  *
  * @module context-loader
  */
@@ -53,7 +53,7 @@ function readFileSafe(filePath: string): string {
 }
 
 /**
- * Load CORE skill context
+ * Load PAI skill context
  *
  * Reads:
  * - SKILL.md (skill definition)
@@ -65,32 +65,32 @@ function readFileSafe(filePath: string): string {
 export async function loadContext(): Promise<ContextResult> {
   try {
     const opencodeDir = getOpenCodeDir();
-    const coreSkillDir = join(opencodeDir, "skills", "CORE");
+    const paiSkillDir = join(opencodeDir, "skills", "PAI");
 
-    fileLog(`Loading context from: ${coreSkillDir}`);
+    fileLog(`Loading context from: ${paiSkillDir}`);
 
-    // Check if CORE skill exists
-    if (!existsSync(coreSkillDir)) {
-      fileLog("CORE skill directory not found", "warn");
+    // Check if PAI skill exists
+    if (!existsSync(paiSkillDir)) {
+      fileLog("PAI skill directory not found", "warn");
       return {
         context: "",
         success: false,
-        error: "CORE skill not found",
+        error: "PAI skill not found",
       };
     }
 
     const contextParts: string[] = [];
 
     // 1. Load SKILL.md
-    const skillPath = join(coreSkillDir, "SKILL.md");
+    const skillPath = join(paiSkillDir, "SKILL.md");
     const skillContent = readFileSafe(skillPath);
     if (skillContent) {
-      contextParts.push(`--- CORE SKILL ---\n${skillContent}`);
+      contextParts.push(`--- PAI SKILL ---\n${skillContent}`);
       fileLog("Loaded SKILL.md");
     }
 
     // 2. Load SYSTEM docs (if exists) - v2.4 compatible
-    const systemDir = join(coreSkillDir, "SYSTEM");
+    const systemDir = join(paiSkillDir, "SYSTEM");
     if (existsSync(systemDir)) {
       // Priority SYSTEM files for v2.4
       const systemFiles = [
@@ -112,7 +112,7 @@ export async function loadContext(): Promise<ContextResult> {
     }
 
     // 3. Load USER/TELOS context (if exists) - v2.4 compatible
-    const telosDir = join(coreSkillDir, "USER", "TELOS");
+    const telosDir = join(paiSkillDir, "USER", "TELOS");
     if (existsSync(telosDir)) {
       // Priority TELOS files for v2.4 (most important first)
       const telosFiles = [
@@ -134,7 +134,7 @@ export async function loadContext(): Promise<ContextResult> {
     }
 
     // 4. Load USER identity files - v2.4 compatible
-    const userDir = join(coreSkillDir, "USER");
+    const userDir = join(paiSkillDir, "USER");
     const userFiles = [
       "ABOUTME.md",           // User profile
       "BASICINFO.md",         // v2.4: Basic information
@@ -163,7 +163,7 @@ export async function loadContext(): Promise<ContextResult> {
     }
 
     const context = `<system-reminder>
-PAI CORE CONTEXT (Auto-loaded by PAI-OpenCode Plugin)
+PAI CONTEXT (Auto-loaded by PAI-OpenCode Plugin)
 
 ${contextParts.join("\n\n")}
 

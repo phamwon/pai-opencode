@@ -10,7 +10,7 @@
 ### Before (v1.0.0 - Over-engineered)
 
 - ❌ 5 elaborate YAML files with memory blocks and init prompts
-- ❌ Duplicated CORE content (stack preferences, coding standards)
+- ❌ Duplicated PAI content (stack preferences, coding standards)
 - ❌ Complex AgentProfileLoader.ts with YAML parsing
 - ❌ Three layers of redundant context
 
@@ -19,7 +19,7 @@
 - ✅ 5 simple markdown context files (one per agent type)
 - ✅ References Skills, doesn't duplicate content
 - ✅ Simple LoadAgentContext.ts (just reads markdown)
-- ✅ Supplements CORE without redundancy
+- ✅ Supplements PAI without redundancy
 
 ---
 
@@ -65,12 +65,12 @@ Example: `ArchitectContext.md`
 **Model**: opus
 
 ## Required Knowledge (Pre-load from Skills)
-- **skills/CORE/CONSTITUTION.md** - Foundational principles
-- **skills/CORE/CoreStack.md** - Stack preferences
+- **skills/PAI/CONSTITUTION.md** - Foundational principles
+- **skills/PAI/CoreStack.md** - Stack preferences
 
 ## Task-Specific Knowledge
 - **api** → skills/Development/References/APIDesign.md
-- **security** → skills/CORE/SecurityProtocols.md
+- **security** → skills/PAI/SecurityProtocols.md
 ```
 
 ### 2. Simple Loader Reads Context
@@ -101,10 +101,10 @@ await Task({
 
 ## Key Benefits
 
-1. **No Duplication**: CORE already provides constitutional principles, stack preferences, etc.
+1. **No Duplication**: PAI already provides constitutional principles, stack preferences, etc.
 2. **Simple**: One markdown file per agent - easy to understand and maintain
 3. **References Skills**: Acts as "reading list" pointing to existing knowledge
-4. **Supplements CORE**: Adds agent-specific context without replacing base knowledge
+4. **Supplements PAI**: Adds agent-specific context without replacing base knowledge
 5. **Maintainable**: When Skills change, just update references, not content
 
 ---
@@ -138,7 +138,7 @@ bun run ~/.opencode/skills/Agents/Tools/LoadAgentContext.ts Engineer "Implement 
 
 ## What Agents Get When Spawned
 
-1. **CORE context** (auto-loaded at session start)
+1. **PAI context** (auto-loaded at session start)
    - Constitutional principles
    - Stack preferences
    - Security protocols

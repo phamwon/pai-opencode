@@ -6,7 +6,7 @@ description: Voice server management. USE WHEN voice server, TTS server, voice n
 ## Customization
 
 **Before executing, check for user customizations at:**
-`~/.opencode/skills/CORE/USER/SKILLCUSTOMIZATIONS/VoiceServer/`
+`~/.opencode/skills/PAI/USER/SKILLCUSTOMIZATIONS/VoiceServer/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
@@ -34,7 +34,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 
 **Domain**: Voice notification system using ElevenLabs TTS with prosody guidance.
 
-**Algorithm**: `~/.opencode/skills/CORE/SKILL.md (Algorithm embedded in v2.4)`
+**Algorithm**: `~/.opencode/skills/PAI/SKILL.md (Algorithm embedded in v2.4)`
 
 ---
 

@@ -9,7 +9,7 @@
 **REQUIRED FIRST:** Read the canonical structure:
 
 ```
-~/.opencode/skills/CORE/SkillSystem.md
+~/.opencode/skills/PAI/SkillSystem.md
 ```
 
 ---

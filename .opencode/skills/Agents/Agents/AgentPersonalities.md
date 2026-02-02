@@ -155,7 +155,7 @@ Task(prompt="You are Dr. Nova...", subagent_type="general-purpose")
 
 ## Named Agent Architecture
 
-- **Location**: `~/.opencode/skills/CORE/AgentPersonalities.md` (this file)
+- **Location**: `~/.opencode/skills/PAI/AgentPersonalities.md` (this file)
 - **Consumer**: `~/.opencode/VoiceServer/server.ts` extracts JSON config from this file
 - **Format**: Human-readable markdown with embedded JSON configuration
 
@@ -804,7 +804,7 @@ Voice server automatically loads this configuration at startup. To update person
 
 - **v1.3.2** (2025-11-16): DRAMATIC voice differentiation - 97% rate increase, 54% similarity increase, 42% stability increase using personality psychology mapping
 - **v1.3.1** (2025-11-16): Deep character development - backstories, life events, refined voice characteristics
-- **v1.3.0** (2025-11-16): Centralized in CORE, increased expressiveness for all agents
+- **v1.3.0** (2025-11-16): Centralized in PAI, increased expressiveness for all agents
 - **v1.2.1** (2025-11-16): Enhanced DA expressiveness specifically
 - **v1.2.0** (2025-11-16): Added character personalities for 5 key agents
 - **v1.1.0** (2025-11-16): Initial agent personality system

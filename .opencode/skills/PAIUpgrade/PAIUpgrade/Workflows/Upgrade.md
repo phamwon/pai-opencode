@@ -41,11 +41,11 @@ Use Task tool with subagent_type=Intern, run 4 agents in parallel:
 
 Agent 1 - TELOS Analysis:
 "Read and analyze the user's TELOS files to understand their current focus:
-- ~/.opencode/skills/CORE/USER/TELOS/TELOS.md
-- ~/.opencode/skills/CORE/USER/TELOS/GOALS.md
-- ~/.opencode/skills/CORE/USER/TELOS/PROJECTS.md
-- ~/.opencode/skills/CORE/USER/TELOS/CHALLENGES.md
-- ~/.opencode/skills/CORE/USER/TELOS/STATUS.md
+- ~/.opencode/skills/PAI/USER/TELOS/TELOS.md
+- ~/.opencode/skills/PAI/USER/TELOS/GOALS.md
+- ~/.opencode/skills/PAI/USER/TELOS/PROJECTS.md
+- ~/.opencode/skills/PAI/USER/TELOS/CHALLENGES.md
+- ~/.opencode/skills/PAI/USER/TELOS/STATUS.md
 
 Extract and return:
 1. Current high-priority goals
@@ -143,7 +143,7 @@ Agent 2 - YouTube Channels:
 "Check configured YouTube channels for new content and EXTRACT GRANULAR TECHNIQUES:
 
 1. Load channel config:
-   bun ~/.opencode/skills/CORE/Tools/LoadSkillConfig.ts ~/.opencode/skills/PAIUpgrade youtube-channels.json
+   bun ~/.opencode/skills/PAI/Tools/LoadSkillConfig.ts ~/.opencode/skills/PAIUpgrade youtube-channels.json
 
 2. For each channel, check recent videos:
    yt-dlp --flat-playlist --dump-json 'https://www.youtube.com/@channelhandle/videos' 2>/dev/null | head -5
@@ -152,7 +152,7 @@ Agent 2 - YouTube Channels:
    cat ~/.opencode/skills/PAIUpgrade/State/youtube-videos.json
 
 4. For NEW videos, extract transcripts:
-   bun ~/.opencode/skills/CORE/Tools/GetTranscript.ts '<video-url>'
+   bun ~/.opencode/skills/PAI/Tools/GetTranscript.ts '<video-url>'
 
 5. CRITICAL - For each transcript, extract SPECIFIC TECHNIQUES:
    - Look for code patterns, configurations, command examples
@@ -177,7 +177,7 @@ If a video has no extractable techniques, mark it as 'skipped: no techniques fou
 Agent 3 - Custom Sources:
 "Check for any custom sources defined by the user:
 
-1. Look in ~/.opencode/skills/CORE/USER/SKILLCUSTOMIZATIONS/PAIUpgrade/
+1. Look in ~/.opencode/skills/PAI/USER/SKILLCUSTOMIZATIONS/PAIUpgrade/
 2. Check for additional source definitions beyond YouTube
 3. If sources exist, check them for updates
 

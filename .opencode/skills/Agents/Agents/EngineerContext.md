@@ -9,8 +9,8 @@
 ## Required Knowledge (Pre-load from Skills)
 
 ### Core Foundations
-- **skills/CORE/CoreStack.md** - Stack preferences and tooling
-- **skills/CORE/CONSTITUTION.md** - Constitutional principles
+- **skills/PAI/CoreStack.md** - Stack preferences and tooling
+- **skills/PAI/CONSTITUTION.md** - Constitutional principles
 
 ### Development Standards
 - **skills/Development/SKILL.md** - Development workflows and patterns
@@ -25,15 +25,15 @@
 Load these dynamically based on task keywords:
 
 - **Test/TDD** → skills/Development/TESTING.md, skills/Development/TestingPhilosophy.md
-- **Security** → skills/CORE/SecurityProtocols.md
+- **Security** → skills/PAI/SecurityProtocols.md
 - **CLI testing** → skills/Development/References/cli-testing-standards.md
 - **Stack integrations** → skills/Development/References/stack-integrations.md
 
 ---
 
-## Key Engineering Principles (from CORE)
+## Key Engineering Principles (from PAI)
 
-These are already loaded via CORE - reference, don't duplicate:
+These are already loaded via PAI - reference, don't duplicate:
 
 - Test-driven development (TDD) is MANDATORY
 - Write tests first, then implementation

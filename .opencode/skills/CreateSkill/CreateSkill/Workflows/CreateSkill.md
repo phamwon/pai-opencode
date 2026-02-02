@@ -17,7 +17,7 @@ Running the **CreateSkill** workflow in the **CreateSkill** skill to create new 
 
 **REQUIRED FIRST:**
 
-1. Read the skill system documentation: `~/.opencode/skills/CORE/SkillSystem.md`
+1. Read the skill system documentation: `~/.opencode/skills/PAI/SkillSystem.md`
 2. Read the canonical example: `~/.opencode/skills/_BLOGGING/SKILL.md`
 
 ## Step 2: Understand the Request
@@ -87,7 +87,7 @@ description: [What it does]. USE WHEN [intent triggers using OR]. [Additional ca
    Running **WorkflowName** in **SkillName**...
    ```
 
-**Full documentation:** `~/.opencode/skills/CORE/SYSTEM/THENOTIFICATIONSYSTEM.md`
+**Full documentation:** `~/.opencode/skills/PAI/SYSTEM/THENOTIFICATIONSYSTEM.md`
 
 ## Workflow Routing
 
@@ -165,7 +165,7 @@ bun ToolName.ts \
 - Workflows should expose this flexibility, not hardcode single patterns
 - Users speak naturally; workflows translate to precise CLI
 
-**Reference:** `~/.opencode/skills/CORE/CliFirstArchitecture.md` (Workflow-to-Tool Integration section)
+**Reference:** `~/.opencode/skills/PAI/CliFirstArchitecture.md` (Workflow-to-Tool Integration section)
 
 **Examples (TitleCase):**
 ```bash

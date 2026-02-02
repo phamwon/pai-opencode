@@ -6,7 +6,7 @@ description: 240+ prompt patterns for content analysis and transformation. USE W
 ## Customization
 
 **Before executing, check for user customizations at:**
-`~/.opencode/skills/CORE/USER/SKILLCUSTOMIZATIONS/Fabric/`
+`~/.opencode/skills/PAI/USER/SKILLCUSTOMIZATIONS/Fabric/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
@@ -27,7 +27,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
    Running the **WorkflowName** workflow in the **Fabric** skill to ACTION...
    ```
 
-**Full documentation:** `~/.opencode/skills/CORE/SYSTEM/THENOTIFICATIONSYSTEM.md`
+**Full documentation:** `~/.opencode/skills/PAI/SYSTEM/THENOTIFICATIONSYSTEM.md`
 
 # Fabric
 
@@ -182,7 +182,7 @@ Each pattern's `system.md` contains the full prompt that defines:
 ## Changelog
 
 ### 2026-01-18
-- Initial skill creation (extracted from CORE/Tools/fabric)
+- Initial skill creation (extracted from PAI/Tools/fabric)
 - Native pattern execution (no CLI dependency for most patterns)
 - Two workflows: ExecutePattern, UpdatePatterns
 - 240+ patterns organized by category

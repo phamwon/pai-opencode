@@ -286,10 +286,10 @@ function generateSettingsJson(config: InstallConfig): object {
       "BASH_DEFAULT_TIMEOUT_MS": "600000"
     },
     "contextFiles": [
-      "skills/CORE/SKILL.md",
-      "skills/CORE/SYSTEM/AISTEERINGRULES.md",
-      "skills/CORE/USER/AISTEERINGRULES.md",
-      "skills/CORE/USER/DAIDENTITY.md"
+      "skills/PAI/SKILL.md",
+      "skills/PAI/SYSTEM/AISTEERINGRULES.md",
+      "skills/PAI/USER/AISTEERINGRULES.md",
+      "skills/PAI/USER/DAIDENTITY.md"
     ],
     "daidentity": {
       "name": config.AI_NAME,
@@ -462,11 +462,11 @@ function validate(): { passed: boolean; results: string[] } {
     }
   }
 
-  // Check CORE skill
-  if (existsSync(join(OPENCODE_DIR, 'skills', 'CORE', 'SKILL.md'))) {
-    results.push(`${c.green}✓${c.reset} CORE skill found`);
+  // Check PAI skill
+  if (existsSync(join(OPENCODE_DIR, 'skills', 'PAI', 'SKILL.md'))) {
+    results.push(`${c.green}✓${c.reset} PAI skill found`);
   } else {
-    results.push(`${c.red}✗${c.reset} CORE skill missing`);
+    results.push(`${c.red}✗${c.reset} PAI skill missing`);
     passed = false;
   }
 
@@ -566,12 +566,12 @@ async function main(): Promise<void> {
   printSuccess('Created settings.json (.opencode/)');
 
   // DAIDENTITY.md
-  const daIdentityPath = join(OPENCODE_DIR, 'skills', 'CORE', 'USER', 'DAIDENTITY.md');
+  const daIdentityPath = join(OPENCODE_DIR, 'skills', 'PAI', 'USER', 'DAIDENTITY.md');
   writeFileSync(daIdentityPath, generateDAIdentity(config));
   printSuccess('Created DAIDENTITY.md');
 
   // BASICINFO.md
-  const basicInfoPath = join(OPENCODE_DIR, 'skills', 'CORE', 'USER', 'BASICINFO.md');
+  const basicInfoPath = join(OPENCODE_DIR, 'skills', 'PAI', 'USER', 'BASICINFO.md');
   writeFileSync(basicInfoPath, generateBasicInfo(config));
   printSuccess('Created BASICINFO.md');
 

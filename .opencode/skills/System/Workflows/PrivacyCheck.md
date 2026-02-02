@@ -135,8 +135,8 @@ grep -r "USER/" SYSTEM/ --include="*.md" --include="*.ts" 2>/dev/null
 # - Direct paths: "see USER/steffen/project.md"
 # - Specific content: "as configured in USER/config.json"
 
-# Check skills (outside CORE) for USER/ references
-grep -r "USER/" .opencode/skills/*/SKILL.md | grep -v "CORE/SKILL.md"
+# Check skills (outside PAI) for USER/ references
+grep -r "USER/" .opencode/skills/*/SKILL.md | grep -v "PAI/SKILL.md"
 ```
 
 **Validation rules:**
@@ -148,8 +148,8 @@ function validateUserReference(file: string, match: string): Issue | null {
     return null;
   }
 
-  // Allow CORE skill (it's private context loader)
-  if (file.includes("skills/CORE/")) {
+  // Allow PAI skill (it's private context loader)
+  if (file.includes("skills/PAI/")) {
     return null;
   }
 
@@ -655,7 +655,7 @@ for (const fix of autoFixes) {
 - **CrossRepoValidation**: Uses similar detection patterns
 - **IntegrityCheck**: Can include privacy check as component
 - **GitPush**: Run before committing to validate no privacy leaks
-- **CORE Skill**: Privacy-aware context loading
+- **PAI Skill**: Privacy-aware context loading
 
 ## Example Usage
 

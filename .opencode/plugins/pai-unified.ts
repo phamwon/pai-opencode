@@ -32,6 +32,7 @@ import {
   isTaskTool,
 } from "./handlers/agent-capture";
 import { extractLearningsFromWork } from "./handlers/learning-capture";
+import { validateISC } from "./handlers/isc-validator";
 import { fileLog, fileLogError, clearLog } from "./lib/file-logger";
 
 /**
@@ -81,7 +82,7 @@ export const PaiUnified: Plugin = async (ctx) => {
     /**
      * CONTEXT INJECTION (SessionStart equivalent)
      *
-     * Injects CORE skill context into the chat system.
+     * Injects PAI skill context into the chat system.
      * Equivalent to PAI v2.4 load-core-context.ts hook.
      */
     "experimental.chat.system.transform": async (input, output) => {
@@ -356,6 +357,31 @@ export const PaiUnified: Plugin = async (ctx) => {
             }
           } catch (error) {
             fileLogError("Work session completion failed", error);
+          }
+        }
+
+        // === ASSISTANT MESSAGE HANDLING (ISC VALIDATION) ===
+        // Validate ISC after assistant completes a response
+        if (eventType === "message.updated") {
+          const eventData = input.event as any;
+          const message = eventData?.properties?.message;
+          
+          if (message?.role === "assistant") {
+            const responseText = extractTextContent(message);
+            if (responseText.length > 100) {
+              // Run ISC validation on non-trivial assistant responses
+              try {
+                const iscResult = await validateISC(responseText);
+                if (iscResult.algorithmDetected) {
+                  fileLog(`[ISC Validation] Algorithm detected, ${iscResult.criteriaCount} criteria found`, "info");
+                  if (iscResult.warnings.length > 0) {
+                    fileLog(`[ISC Validation] Warnings: ${iscResult.warnings.join(", ")}`, "warn");
+                  }
+                }
+              } catch (error) {
+                fileLogError("[ISC Validation] Failed", error);
+              }
+            }
           }
         }
 

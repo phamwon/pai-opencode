@@ -107,7 +107,7 @@ reset && opencode
 
 ## Getting Help
 
-- **Documentation**: `skills/CORE/SKILL.md`
+- **Documentation**: `skills/PAI/SKILL.md`
 - **GitHub**: [github.com/Steffen025/pai-opencode](https://github.com/Steffen025/pai-opencode)
 
 ---

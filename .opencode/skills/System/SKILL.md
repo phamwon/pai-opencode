@@ -6,7 +6,7 @@ description: System maintenance - integrity check, document session, secret scan
 ## Customization
 
 **Before executing, check for user customizations at:**
-`~/.opencode/skills/CORE/USER/SKILLCUSTOMIZATIONS/System/`
+`~/.opencode/skills/PAI/USER/SKILLCUSTOMIZATIONS/System/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
@@ -223,7 +223,7 @@ Quick Push:         GitPush (if docs already created)
 
 | Tool | Purpose | Location |
 |------|---------|----------|
-| **SecretScan.ts** | TruffleHog wrapper for credential detection | `CORE/Tools/SecretScan.ts` |
+| **SecretScan.ts** | TruffleHog wrapper for credential detection | `PAI/Tools/SecretScan.ts` |
 | **CreateUpdate.ts** | Create new system update entries | `Tools/CreateUpdate.ts` |
 | **UpdateIndex.ts** | Regenerate index.json and CHANGELOG.md | `Tools/UpdateIndex.ts` |
 | **UpdateSearch.ts** | Search and query system updates | `Tools/UpdateSearch.ts` |
@@ -251,5 +251,5 @@ Quick Push:         GitPush (if docs already created)
 ## Related Skills
 
 - **PAI** - Public PAI repository management (includes PAIIntegrityCheck)
-- **CORE** - System architecture and memory documentation
+- **PAI** - System architecture and memory documentation
 - **Evals** - Regression testing and capability verification

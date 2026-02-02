@@ -9,7 +9,7 @@
 **REQUIRED FIRST:** Read the canonical structure:
 
 ```
-~/.opencode/skills/CORE/SkillSystem.md
+~/.opencode/skills/PAI/SkillSystem.md
 ```
 
 ---
@@ -176,7 +176,7 @@ grep -l "Intent-to-Flag" ~/.opencode/skills/[SkillName]/Workflows/*.md
 | (default) | `--model sonnet` | Balanced |
 ```
 
-**Reference:** `~/.opencode/skills/CORE/CliFirstArchitecture.md`
+**Reference:** `~/.opencode/skills/PAI/CliFirstArchitecture.md`
 
 ---
 

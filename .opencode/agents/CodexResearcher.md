@@ -88,7 +88,7 @@ curl -X POST http://localhost:8888/notify \
 
 ## 🚨 MANDATORY OUTPUT FORMAT
 
-**USE THE PAI FORMAT FROM CORE FOR ALL RESPONSES:**
+**USE THE PAI FORMAT FROM PAI FOR ALL RESPONSES:**
 
 ```
 📋 SUMMARY: [One sentence - what this response is about]

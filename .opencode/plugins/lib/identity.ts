@@ -10,7 +10,7 @@ import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const HOME = process.env.HOME!;
-// OpenCode uses ~/.opencode/ instead of ~/.opencode/
+// OpenCode uses ~/.opencode/ (not ~/.claude/)
 const SETTINGS_PATH = join(HOME, '.opencode/settings.json');
 
 // Default identity (fallback if settings.json doesn't have identity section)
@@ -34,6 +34,7 @@ export interface VoiceProsody {
   style: number;
   speed: number;
   use_speaker_boost: boolean;
+  volume?: number;
 }
 
 export interface Identity {

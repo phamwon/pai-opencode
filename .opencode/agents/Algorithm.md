@@ -44,7 +44,7 @@ curl -X POST http://localhost:8888/notify \
 ```
 
 2. **Load your knowledge base:**
-   - Read: `~/.opencode/skills/CORE/SKILL.md` (The PAI Algorithm spec)
+   - Read: `~/.opencode/skills/PAI/SKILL.md` (The PAI Algorithm spec)
    - Read: `~/.opencode/skills/skill-index.json` (Available capabilities)
    - This loads all ISC principles and available skills
    - DO NOT proceed until you've read these files

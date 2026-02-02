@@ -7,7 +7,7 @@ context: fork
 ## Customization
 
 **Before executing, check for user customizations at:**
-`~/.opencode/skills/CORE/USER/SKILLCUSTOMIZATIONS/BrightData/`
+`~/.opencode/skills/PAI/USER/SKILLCUSTOMIZATIONS/BrightData/`
 
 If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
@@ -175,7 +175,7 @@ Skill Response:
 ---
 
 **Related Documentation:**
-- `~/.opencode/skills/CORE/SkillSystem.md` - Canonical structure guide
-- `~/.opencode/skills/CORE/CONSTITUTION.md` - Overall PAI philosophy
+- `~/.opencode/skills/PAI/SkillSystem.md` - Canonical structure guide
+- `~/.opencode/skills/PAI/CONSTITUTION.md` - Overall PAI philosophy
 
 **Last Updated:** 2025-11-23

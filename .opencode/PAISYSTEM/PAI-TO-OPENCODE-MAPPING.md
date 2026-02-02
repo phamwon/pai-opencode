@@ -82,12 +82,12 @@ PAI-OpenCode:   .opencode/agents/*.md
     └── ...
 ```
 
-### 4. CORE Skill (Special Handling)
+### 4. PAI Skill (Special Handling)
 
-**Rule:** CORE skill has sub-structures that must be preserved.
+**Rule:** PAI skill has sub-structures that must be preserved.
 
 ```
-.opencode/skills/CORE/
+.opencode/skills/PAI/
 ├── SKILL.md                # The Algorithm + Core Instructions
 ├── SYSTEM/                 # System documentation (updatable)
 │   ├── PAISYSTEMARCHITECTURE.md
@@ -126,7 +126,7 @@ PAI-OpenCode:   .opencode/agents/*.md
 PAI 2.4:        .claude/skills/Fabric/Patterns/
 PAI-OpenCode:   .opencode/skills/Fabric/Patterns/
 
-⚠️ DO NOT copy to CORE/Tools/fabric/ - that creates duplicates!
+⚠️ DO NOT copy to PAI/Tools/fabric/ - that creates duplicates!
 ```
 
 ---
@@ -180,7 +180,7 @@ These exist in PAI-OpenCode but not in PAI 2.4:
 |-----------|---------|
 | `plugins/` | OpenCode plugin system |
 | `profiles/` | API provider profiles (anthropic, openai, local) |
-| `PAISECURITYSYSTEM/` | Security documentation (moved from CORE/SYSTEM) |
+| `PAISECURITYSYSTEM/` | Security documentation (moved from PAI/SYSTEM) |
 | `package.json` | Bun dependencies |
 | `tsconfig.json` | TypeScript configuration |
 
@@ -200,8 +200,8 @@ When importing a new PAI version:
 - [ ] Copy skills maintaining flat structure (no nesting)
 - [ ] Copy agents, convert color names to hex
 - [ ] Review hook changes, update plugin handlers
-- [ ] Update CORE/SYSTEM docs with new content
-- [ ] Preserve CORE/USER (never overwrite)
+- [ ] Update PAI/SYSTEM docs with new content
+- [ ] Preserve PAI/USER (never overwrite)
 
 ### Post-Import
 - [ ] Verify SKILL.md count matches
@@ -232,7 +232,7 @@ When importing a new PAI version:
 ### 4. Duplicate Fabric Patterns
 **Symptom:** Repo size unexpectedly large
 **Cause:** Patterns copied to multiple locations
-**Fix:** Keep only `skills/Fabric/Patterns/`, remove from `CORE/Tools/`
+**Fix:** Keep only `skills/Fabric/Patterns/`, remove from `PAI/Tools/`
 
 ---
 

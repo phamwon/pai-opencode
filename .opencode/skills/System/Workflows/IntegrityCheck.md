@@ -41,11 +41,11 @@ Use the Task tool to launch agents in a SINGLE message (parallel execution). Eac
 
 | # | Focus Area | Scope | Check For |
 |---|------------|-------|-----------|
-| 1 | CORE SKILL.md | `skills/CORE/SKILL.md` | Broken file references, outdated paths |
+| 1 | PAI SKILL.md | `skills/PAI/SKILL.md` | Broken file references, outdated paths |
 | 2 | Identity System | `plugins/lib/identity.ts`, `settings.json` | Config consistency |
 | 3 | Plugin Scripts | `plugins/*.ts` | Imports, identity usage, TypeScript validity |
-| 4 | System Docs | `skills/CORE/SYSTEM/*.md` | Cross-references, broken links |
-| 5 | User Docs | `skills/CORE/USER/*.md` | Personal config references |
+| 4 | System Docs | `skills/PAI/SYSTEM/*.md` | Cross-references, broken links |
+| 5 | User Docs | `skills/PAI/USER/*.md` | Personal config references |
 | 6 | Workflows | `skills/*/Workflows/*.md` | File paths, tool references |
 | 7 | Tools | `skills/*/Tools/*.ts` | Imports, hardcoded paths |
 | 8 | Settings | `settings.json` | Schema validity, env vars |
@@ -147,7 +147,7 @@ After agents complete:
 
 ## Detailed Component Reports
 
-### Agent 1: CORE SKILL.md Audit
+### Agent 1: PAI SKILL.md Audit
 - Files Checked: X
 - Critical Issues: Y
 - Warnings: Z
@@ -209,7 +209,7 @@ Launch ALL 12 agents in a SINGLE Task tool call block for true parallel executio
 // In a single message, call Task 12 times:
 // NOTE: OpenCode uses "Intern" instead of Claude Code's native "Explore"
 // NOTE: Model names must include provider prefix for OpenCode
-Task({ subagent_type: "Intern", prompt: "Agent 1: CORE SKILL.md..." })
+Task({ subagent_type: "Intern", prompt: "Agent 1: PAI SKILL.md..." })
 Task({ subagent_type: "Intern", prompt: "Agent 2: Identity System..." })
 Task({ subagent_type: "Intern", prompt: "Agent 3: Plugin Scripts..." })
 // ... all 12 agents
