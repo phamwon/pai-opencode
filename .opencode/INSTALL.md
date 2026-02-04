@@ -35,7 +35,7 @@ bun install
 opencode
 ```
 
-That's it! PAI 2.4 is now running on OpenCode.
+That's it! PAI 2.5 is now running on OpenCode.
 
 ### Method 2: Migration from Claude Code PAI
 
@@ -65,20 +65,71 @@ Edit `.opencode/settings.json` to customize:
 - AI preferences
 - Permissions
 
+## Voice Server Setup (Optional)
+
+PAI-OpenCode includes a voice notification server for TTS (Text-to-Speech) output.
+
+### Quick Start
+
+```bash
+# Start the voice server
+cd .opencode/voice-server
+bun run server.ts
+```
+
+The server runs on `localhost:8888` by default.
+
+### TTS Provider Configuration
+
+Add to your `.opencode/.env`:
+
+**Option A: ElevenLabs (Recommended)**
+```bash
+TTS_PROVIDER=elevenlabs
+ELEVENLABS_API_KEY=your_key_here
+ELEVENLABS_VOICE_ID=s3TPKV1kjDlVtZbl4Ksh  # Optional, this is the default
+```
+
+**Option B: Google Cloud TTS**
+```bash
+TTS_PROVIDER=google
+GOOGLE_API_KEY=your_key_here
+GOOGLE_TTS_TIER=premium  # or 'standard'
+```
+
+### Run as Background Service
+
+```bash
+# Start in background
+nohup bun run .opencode/voice-server/server.ts > /dev/null 2>&1 &
+
+# Or use PM2
+pm2 start .opencode/voice-server/server.ts --name pai-voice --interpreter bun
+```
+
+### Fallback Behavior
+
+If the voice server is unavailable, PAI-OpenCode automatically falls back to:
+1. Google Cloud TTS (if `GOOGLE_TTS_API_KEY` configured)
+2. macOS `say` command (on macOS only)
+
+See `.opencode/voice-server/README.md` for detailed documentation.
+
 ## What's Included
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| Skills | 29 | PAI 2.4 skills adapted for OpenCode |
-| Agents | 14 | Named AI personalities |
-| Plugin | 1 | Unified (security + context) |
+| Skills | 29 | PAI 2.5 skills adapted for OpenCode |
+| Agents | 16 | Named AI personalities |
+| Plugin | 1 | Unified (13 handlers: security, context, voice, sentiment, etc.) |
+| Voice Server | 1 | TTS notifications (ElevenLabs/Google) |
 | Converter | 1 | For migrating PAI updates |
 
 > **Note:** For detailed installation instructions including the Installation Wizard, see [INSTALL.md](../INSTALL.md) in the repository root.
 
 ## What's Different from Claude Code PAI
 
-| PAI 2.4 (Claude Code) | PAI-OpenCode |
+| PAI 2.5 (Claude Code) | PAI-OpenCode |
 |-----------------------|--------------|
 | `hooks/` | `plugins/` |
 | `.claude/` | `.opencode/` |

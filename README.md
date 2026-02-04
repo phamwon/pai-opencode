@@ -102,7 +102,7 @@ This **10-15 minute** interactive session will configure your complete TELOS fra
 
 ![Features Showcase](docs/images/features-showcase.png)
 
-### 🎯 Skills System
+### 🎯 Skills System (29 Skills)
 Modular, reusable capabilities invoked by name:
 - **CORE** — Identity, preferences, auto-loaded at session start
 - **Art** — Excalidraw-style visual diagrams
@@ -110,7 +110,7 @@ Modular, reusable capabilities invoked by name:
 - **Security** — Pentesting, secret scanning
 - **Research** — Cost-aware multi-provider research system (see below)
 
-### 🤖 Agent Orchestration
+### 🤖 Agent Orchestration (16 Agents)
 Dynamic multi-agent composition with specialized roles:
 - **Agents Skill** — Create custom agents with personalities
 - **RedTeam** — 32-agent adversarial analysis

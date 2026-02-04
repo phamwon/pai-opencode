@@ -135,9 +135,16 @@ All new handlers are automatically available. No configuration changes needed.
 
 To enable voice notifications:
 
-1. Start a voice server on `localhost:8888`
-2. Or configure Google Cloud TTS credentials
-3. Or rely on macOS `say` fallback (automatic)
+1. Start the included voice server:
+   ```bash
+   cd .opencode/voice-server && bun run server.ts
+   ```
+2. Configure TTS provider in `.opencode/.env`:
+   - ElevenLabs: `ELEVENLABS_API_KEY=your_key`
+   - Google Cloud TTS: `GOOGLE_API_KEY=your_key`
+3. Fallback: macOS `say` command works automatically
+
+See `.opencode/voice-server/README.md` for full documentation.
 
 ---
 

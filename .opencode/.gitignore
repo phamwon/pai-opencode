@@ -12,3 +12,6 @@ USER/*
 
 # Security patterns (user customizes)
 PAISECURITYSYSTEM/patterns.yaml
+
+# Voice server logs (runtime generated)
+voice-server/logs/*.log

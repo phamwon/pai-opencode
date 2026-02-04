@@ -123,7 +123,7 @@ If you prefer to install manually without the wizard:
 
 **Step 1:** Install OpenCode
 ```bash
-go install github.com/opencode-ai/opencode@latest
+go install github.com/anomalyco/opencode@latest
 ```
 
 **Step 2:** Clone the repository
