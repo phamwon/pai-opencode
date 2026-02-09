@@ -215,7 +215,7 @@ Each profile uses a **3-tier model strategy**:
 |------|---------|-----------|--------|--------|
 | **Most Capable** | Algorithm (orchestration) | claude-opus-4-6 | gpt-5.1 | gemini-2.5-pro |
 | **Standard** | Most agents (coding, research) | claude-sonnet-4-5 | gpt-4.1 | gemini-2.5-flash |
-| **Budget** | Explore, Intern (fast tasks) | claude-haiku-4-5 | gpt-4.1-mini | gemini-2.0-flash-lite |
+| **Budget** | explore, Intern (fast tasks) | claude-haiku-4-5 | gpt-4.1-mini | gemini-2.0-flash-lite |
 
 ### Multi-Provider Research
 

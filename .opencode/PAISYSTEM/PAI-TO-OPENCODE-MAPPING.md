@@ -133,27 +133,54 @@ PAI-OpenCode:   .opencode/skills/Fabric/Patterns/
 
 ## Agent Type Mapping (CRITICAL)
 
-**Claude Code has native agents that OpenCode does NOT have:**
+⚠️ **CASE-SENSITIVE:** Agent type names must match EXACTLY. `explore` ≠ `Explore`.
 
-| Claude Code Agent | OpenCode Equivalent | Usage |
+OpenCode has **built-in agents** (part of the framework) plus **custom agents** (from `.opencode/agents/`).
+
+### Built-in Agent Types (from OpenCode framework)
+
+These work without any agent definition file:
+
+| subagent_type | Purpose | Notes |
+|---------------|---------|-------|
+| `general` | General-purpose multi-step tasks | Default for complex tasks |
+| `explore` | Fast codebase exploration | ⚠️ **lowercase!** Claude Code used `Explore` (TitleCase) — this WILL FAIL |
+
+### Custom Agent Types (from `.opencode/agents/`)
+
+Defined by `.md` files in the agents directory:
+
+| subagent_type | Purpose |
+|---------------|---------|
+| `Algorithm` | ISC & Algorithm specialist |
+| `Architect` | Elite system design |
+| `Engineer` | Principal engineer, TDD |
+| `Intern` | 176 IQ genius generalist, parallel grunt work |
+| `Designer` | Elite UX/UI specialist |
+| `QATester` | Quality assurance validation |
+| `Pentester` | Offensive security specialist |
+| `Artist` | Visual content creator |
+| `writer` | Content creation, docs, technical writing |
+| `researcher` | Web research, source verification |
+| `ClaudeResearcher` | Academic researcher (Claude WebSearch) |
+| `GeminiResearcher` | Multi-perspective researcher (Google Gemini) |
+| `PerplexityResearcher` | Investigative journalist (Perplexity API) |
+| `PerplexityProResearcher` | Deep investigative journalist (Perplexity Sonar Pro) |
+| `GrokResearcher` | Contrarian researcher (xAI Grok) |
+| `CodexResearcher` | Technical archaeologist (O3, GPT-5-Codex, GPT-4) |
+
+### Claude Code → OpenCode Migration
+
+| Claude Code Agent | OpenCode Equivalent | Notes |
 |-------------------|---------------------|-------|
-| `Explore` | `Intern` | Fast codebase exploration, parallel tasks |
-| `Plan` | `Architect` | Architecture planning, system design |
-| `general-purpose` | `Intern` or `Engineer` | General tasks |
+| `Explore` (TitleCase) | `explore` (lowercase) | Built-in — just fix the case! |
+| `Plan` | `Architect` | No direct equivalent, use Architect |
+| `general-purpose` | `general` or `Intern` | `general` is built-in |
 
 **When porting workflows:**
-1. Replace `subagent_type: "Explore"` with `subagent_type: "Intern"`
+1. Replace `subagent_type: "Explore"` with `subagent_type: "explore"` (lowercase!)
 2. Replace `subagent_type: "Plan"` with `subagent_type: "Architect"`
-3. Replace `subagent_type: "general-purpose"` with appropriate agent
-
-**Available OpenCode agents** (from `.opencode/agents/`):
-- `Intern` - Fast parallel grunt work
-- `Architect` - System design
-- `Engineer` - Implementation
-- `Designer` - UX/UI
-- `Pentester` - Security
-- `QATester` - Testing
-- `ClaudeResearcher`, `GeminiResearcher`, `GrokResearcher` - Research
+3. Replace `subagent_type: "general-purpose"` with `subagent_type: "general"`
 
 ---
 
