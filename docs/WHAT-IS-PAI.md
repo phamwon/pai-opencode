@@ -57,8 +57,12 @@ PAI's Agents system supports:
 - **Personality assignment**: 10+ trait combinations (Assertive, Curious, Diplomatic...)
 - **Parallel orchestration**: Run multiple agents simultaneously
 - **Voice mapping**: Each agent speaks differently
+- **Dynamic model routing**: Each agent scales to the model that matches the task complexity
 
-Example: A "Challenge" agent questions your assumptions, while an "Explore" agent researches alternatives—both running in parallel on the same problem.
+**Dynamic Model Routing (PAI-OpenCode v1.3.0):**
+Agents don't just have fixed models — they dynamically scale up and down. An Engineer agent might use GLM 4.7 for batch file renames, Kimi K2.5 for feature implementation, or Claude Sonnet 4.5 for complex debugging. The orchestrator decides per task, so you always pay exactly what the task requires. This is unique to OpenCode — Claude Code cannot route different agents to different providers within the same session.
+
+Example: A "Challenge" agent questions your assumptions, while an "Explore" agent researches alternatives—both running in parallel on the same problem, each routed to the optimal model for their specific task.
 
 ![Skill vs Agent Flow](images/skill-vs-agent-flow.jpg)
 

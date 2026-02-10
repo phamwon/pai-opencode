@@ -4,7 +4,7 @@ OpenCode is an open-source AI coding assistant built by Anomaly. While many AI c
 
 ## 1. Provider Flexibility (75+ AI Providers)
 
-Unlike tools locked to a single vendor, OpenCode supports **75+ AI providers** out of the box. Use any model you want, switch providers mid-project, or run multiple providers simultaneously.
+Unlike tools locked to a single vendor, OpenCode supports **75+ AI providers** out of the box. But v1.3.0 goes further — you don't just switch providers for the whole session, the orchestrator routes **each agent to different providers within the same session**.
 
 ### Supported Providers (Highlights)
 
@@ -16,14 +16,47 @@ Unlike tools locked to a single vendor, OpenCode supports **75+ AI providers** o
 | **Local** | Ollama, LM Studio, vLLM, LocalAI |
 
 **Why this matters for PAI:**
-PAI is model-agnostic. You can run the same skills, agents, and workflows on Claude Opus, GPT-4, or a local Llama model. OpenCode makes this seamless.
+PAI is model-agnostic. You can run the same skills, agents, and workflows on Claude Opus, GPT-4, or a local Llama model. OpenCode makes this seamless — and v1.3.0 adds dynamic per-agent routing.
 
 ![Provider Grid](images/provider-grid.jpg)
 
-### Switching Providers
+### Dynamic Agent Routing (v1.3.0)
+
+This is the key differentiator: **agents don't just have different models, they dynamically scale up and down based on task complexity**.
+
+| Agent | Default | Scales Down To | Scales Up To |
+|-------|---------|----------------|--------------|
+| **Architect** | Kimi K2.5 | GLM 4.7 (quick review) | Claude Opus 4.6 (complex architecture) |
+| **Engineer** | Kimi K2.5 | GLM 4.7 (batch edits) | Claude Sonnet 4.5 (complex debugging) |
+| **DeepResearcher** | GLM 4.7 | MiniMax (quick lookup) | Kimi K2.5 (deep analysis) |
+| **Writer** | Gemini 3 Flash | MiniMax (quick drafts) | Claude Sonnet 4.5 (premium copy) |
+| **Pentester** | Kimi K2.5 | GLM 4.7 (quick scan) | Claude Sonnet 4.5 (deep audit) |
+
+**How it works:**
+1. You (or the orchestrator) spawn an agent with a task
+2. The orchestrator assesses complexity: quick, standard, or advanced
+3. The agent routes to the appropriate model tier via `model_tier` parameter
+4. Same agent, different model — you pay exactly what the task requires
+
+**Example:**
+```typescript
+// Simple batch work → cheapest model
+Task({ subagent_type: "Engineer", model_tier: "quick", prompt: "Replace X with Y in 20 files" })
+// Routes to GLM 4.7
+
+// Complex debugging → premium model  
+Task({ subagent_type: "Engineer", model_tier: "advanced", prompt: "Debug this race condition" })
+// Routes to Claude Sonnet 4.5
+```
+
+This is unique to OpenCode. Claude Code cannot do this — it's locked to Anthropic only.
+
+### Legacy: Session-Level Provider Switching
+
+For switching the entire session provider (v1.0 behavior):
 
 ```bash
-# Use Claude Opus for complex reasoning
+# Use Claude Opus for everything
 opencode --provider anthropic --model claude-opus-4-5
 
 # Use Groq for blazing-fast iterations
@@ -33,7 +66,7 @@ opencode --provider groq --model llama-3.3-70b-versatile
 opencode --provider ollama --model qwen2.5-coder:32b
 ```
 
-No code changes. Same PAI infrastructure.
+Same PAI infrastructure, different provider strategy.
 
 ## 2. Session Sharing (Real-Time Collaboration)
 
@@ -166,14 +199,15 @@ opencode run "Check for secrets in staged files"
 
 ## Why OpenCode + PAI?
 
-OpenCode's **provider flexibility** + **plugin system** + **multi-client architecture** make it uniquely suited for PAI:
+OpenCode's **provider flexibility** + **plugin system** + **multi-client architecture** + **dynamic agent routing** make it uniquely suited for PAI:
 
 1. **Freedom**: Run PAI skills on any model (Claude, GPT-4, local)
-2. **Collaboration**: Share PAI-enhanced sessions with teammates
-3. **Consistency**: Same PAI experience across terminal, desktop, browser
-4. **Extensibility**: Plugins = unlimited customization
+2. **Dynamic Routing**: Each agent scales to the right model per task — something Claude Code cannot do
+3. **Collaboration**: Share PAI-enhanced sessions with teammates
+4. **Consistency**: Same PAI experience across terminal, desktop, browser
+5. **Extensibility**: Plugins = unlimited customization
 
-OpenCode provides the **platform**. PAI provides the **personalization**.
+OpenCode provides the **platform**. PAI provides the **personalization**. Dynamic tier routing provides the **cost optimization**.
 
 ## Learn More
 

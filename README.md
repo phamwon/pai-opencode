@@ -9,7 +9,7 @@
 [![PAI Version](https://img.shields.io/badge/PAI-2.5-blue)](https://github.com/danielmiessler/Personal_AI_Infrastructure)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **v1.3 Release** — Three-Preset Provider System + Model Tiers. Choose your experience: Anthropic Max (best quality), ZEN PAID (budget-friendly), or ZEN FREE (try it out). See [CHANGELOG.md](CHANGELOG.md).
+> **v1.3 Release** — Multi-Provider Agent System with Dynamic Tier Routing. Every agent scales to the right model for the task. Choose your preset: `zen-paid`, `openrouter`, or `local-ollama`. See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -68,7 +68,7 @@ opencode
 > **Already using OpenCode?** If you have an existing `~/.opencode` directory, see [Existing OpenCode Users](#existing-opencode-users) in the Installation Guide for symlink setup.
 
 The wizard will ask you to:
-- **Choose your preset** — Anthropic Max (recommended), ZEN PAID (budget-friendly), or ZEN FREE (try it out)
+- **Choose your preset** — `zen-paid` (recommended), `openrouter` (provider diversity), or `local-ollama` (fully offline)
 - Configure research agents (optional)
 - Set your name and timezone
 - Name your AI assistant
@@ -114,26 +114,28 @@ Modular, reusable capabilities invoked by name:
 - **Research** — Cost-aware multi-provider research system (see below)
 
 ### 🤖 Agent Orchestration (16 Agents)
-Dynamic multi-agent composition with specialized roles:
+Dynamic multi-agent composition with **intelligent tier routing** — every agent scales up or down based on task complexity:
 
-| Agent | Purpose | Model Tier |
-|-------|---------|------------|
-| **Algorithm** | ISC criteria, verification, algorithm phases | Most Capable |
-| **Architect** | System design, architecture, implementation plans | Standard |
-| **Engineer** | Coding, implementation, bug fixes, refactoring | Standard |
-| **Intern** | Parallel grunt work, simple tasks | Budget |
-| **Explore** | Fast codebase exploration | Budget |
-| **Writer** | Content creation, docs, blog posts | Standard |
-| **DeepResearcher** | Default web research (Ava Sterling) | Standard |
-| **GeminiResearcher** | Multi-perspective analysis | Standard |
-| **PerplexityResearcher** | Real-time news, breaking events | Standard |
-| **GrokResearcher** | Contrarian analysis, X data | Standard |
-| **CodexResearcher** | Code-focused research | Standard |
-| **QATester** | Testing, verification, browser validation | Standard |
-| **Pentester** | Security testing, vulnerability assessment | Standard |
-| **Designer** | UX/UI design, shadcn/ui | Standard |
-| **Artist** | Visual content, prompt engineering | Standard |
-| **General** | General-purpose multi-step tasks | Standard |
+| Agent | Default | Scales Down To | Scales Up To |
+|-------|---------|----------------|--------------|
+| **Algorithm** | Claude Opus 4.6 | — | — |
+| **Architect** | Kimi K2.5 | GLM 4.7 (quick review) | Claude Opus 4.6 (complex architecture) |
+| **Engineer** | Kimi K2.5 | GLM 4.7 (batch edits) | Claude Sonnet 4.5 (complex debugging) |
+| **DeepResearcher** | GLM 4.7 | MiniMax (quick lookup) | Kimi K2.5 (deep analysis) |
+| **GeminiResearcher** | Gemini 3 Flash | — | Gemini 3 Pro (deep research) |
+| **PerplexityResearcher** | Sonar | — | Sonar Deep Research |
+| **GrokResearcher** | Grok 4.1 Fast | — | Grok 4.1 (full analysis) |
+| **CodexResearcher** | GPT-5.1 Codex Mini | — | GPT-5.2 Codex |
+| **Writer** | Gemini 3 Flash | MiniMax (quick drafts) | Claude Sonnet 4.5 (premium copy) |
+| **Pentester** | Kimi K2.5 | GLM 4.7 (quick scan) | Claude Sonnet 4.5 (deep audit) |
+| **Intern** | MiniMax M2.1 | — | — |
+| **Explore** | MiniMax M2.1 | — | — |
+| **QATester** | GLM 4.7 | — | — |
+| **Designer** | Kimi K2.5 | GLM 4.7 | Claude Sonnet 4.5 |
+| **Artist** | Kimi K2.5 | GLM 4.7 | Claude Sonnet 4.5 |
+| **General** | GLM 4.7 | MiniMax | Kimi K2.5 |
+
+The orchestrator decides per task which model tier to use. You always pay exactly what the task requires.
 
 ### 🧠 Memory & Learning
 Persistent context across sessions:
@@ -164,22 +166,26 @@ Use any AI provider:
 
 ## Provider Preset System
 
-PAI-OpenCode offers **three simple presets** — choose the experience you want:
+PAI-OpenCode offers **three presets** — each gives you access to 75+ providers with different routing strategies:
 
-| Preset | Best For | Models | Cost |
-|--------|----------|--------|------|
-| **Anthropic Max** | Best quality, full PAI experience | Claude Opus 4.6 (orchestrator), Sonnet 4.5 (agents) | ~$75/1M output tokens |
-| **ZEN PAID** | Budget-friendly quality | GLM 4.7, Kimi K2.5, Gemini Flash (paid tier, no training) | ~$1-15/1M output tokens |
-| **ZEN FREE** | Trying it out | Free tier models (may train on data) | **FREE** |
+| Preset | Best For | Providers | Cost |
+|--------|----------|-----------|------|
+| **`zen-paid`** (Recommended) | Production use, privacy-conscious | 75+ providers via Zen AI Gateway | ~$1-75/1M tokens depending on tier |
+| **`openrouter`** | Provider diversity, experimental models | OpenRouter routing to 100+ models | Varies by model |
+| **`local-ollama`** | Full privacy, offline operation | Local Ollama instance | **FREE** (your hardware) |
 
 ### Why This Design?
 
-The goal is **simplicity with power**:
-- **3 choices**, not 8+ providers to evaluate
-- **Model tiers** built-in (quick/standard/advanced)
-- **Anthropic Max** for those who want the best
-- **ZEN** for budget-conscious users
-- **Easy to customize** later via [ADVANCED-SETUP.md](docs/ADVANCED-SETUP.md)
+The key insight is **dynamic multi-provider routing within a single session**. Unlike tools locked to one provider, PAI-OpenCode can:
+
+- Route the orchestrator to Anthropic (Opus 4.6) for complex decisions
+- Route research agents to Zen (GLM 4.7, Kimi K2.5) for cost-effective search
+- Route real-time queries to Perplexity (Sonar) for breaking news
+- All in the **same task**, automatically
+
+This is what PAI on OpenCode can do that PAI on Claude Code cannot — Claude Code is locked to Anthropic only.
+
+**Easy to customize** later via [ADVANCED-SETUP.md](docs/ADVANCED-SETUP.md)
 
 ### Switching Presets
 
@@ -192,7 +198,7 @@ bun run .opencode/PAIOpenCodeWizard.ts
 
 ## Model Tiers
 
-Each preset uses a **3-tier model strategy** to optimize cost vs. quality:
+Each agent uses a **3-tier model strategy** — the orchestrator selects the right tier based on task complexity:
 
 | Tier | Purpose | Use Case |
 |------|---------|----------|
@@ -200,9 +206,22 @@ Each preset uses a **3-tier model strategy** to optimize cost vs. quality:
 | **Standard** | Most work | Feature implementation, research, bug fixes |
 | **Advanced** | Complex reasoning | Edge cases, architecture decisions, debugging |
 
-The orchestrator automatically selects the right tier based on task complexity via the `model_tier` parameter in Task tool calls, configured in `opencode.json`.
+### Dynamic Tier Routing in Practice
 
-> **Note:** Model tiers are configured in `opencode.json` per agent. The orchestrator decides which tier to use based on task requirements, not CLI flags.
+The **same agent** uses different models depending on the task:
+
+| Task | Agent | Tier | Model | Why |
+|------|-------|------|-------|-----|
+| Batch rename files | Engineer | `quick` | GLM 4.7 | Simple mechanical work |
+| Implement auth middleware | Engineer | `standard` | Kimi K2.5 | Real coding task |
+| Debug race condition | Engineer | `advanced` | Claude Sonnet 4.5 | Complex reasoning needed |
+| Quick web lookup | DeepResearcher | `quick` | MiniMax | Simple fact check |
+| Strategic market analysis | DeepResearcher | `standard` | GLM 4.7 | Multi-step research |
+| Deep technical investigation | DeepResearcher | `advanced` | Kimi K2.5 | Large context, complex synthesis |
+
+The orchestrator automatically selects the tier via the `model_tier` parameter in Task tool calls. You pay for exactly what the task requires — no more, no less.
+
+> **Note:** Model tier routing is configured in `opencode.json`. The orchestrator makes the decision per task based on complexity assessment.
 
 ---
 
