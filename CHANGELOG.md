@@ -7,15 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## v1.3.0 — Multi-Provider Agent System with Model Tiers (2026-02-10)
+## v1.3.0 — Dynamic Per-Task Model Tier Routing (2026-02-10)
 
-### 🚀 Major: True Multi-Provider Agent System
+### 🚀 Major: Dynamic Tier Routing Across Provider Boundaries
 
-**The agent system has been completely overhauled for cost-efficient, provider-flexible operation.**
+**The orchestrator now automatically routes each task to the right model at the right cost — and the same agent scales up or down dynamically based on task complexity.**
+
+This is a turning point for PAI-OpenCode. Up until v1.2, we were running a 1:1 port of vanilla PAI. With v1.3.0, we leverage what makes OpenCode unique: multi-provider support with dynamic model routing.
+
+As far as we can tell, no other AI coding assistant or agent framework currently offers this pattern of dynamic per-task model tier routing across provider boundaries.
+
+#### How It Works
+
+- **Three-tier model routing** — `quick`, `standard`, `advanced` tiers per agent in `opencode.json`
+- **Orchestrator decides per task** — Same Engineer uses GLM 4.7 for batch edits, Kimi K2.5 for features, Claude Sonnet 4.5 for complex debugging
+- **You always pay exactly what the task requires** — no more, no less
+- Backward-compatible: `model` field still works as fallback
+
+#### Dynamic Tier Routing Table
+
+| Agent | Default | Scales Down To | Scales Up To |
+|-------|---------|----------------|--------------|
+| **Architect** | Kimi K2.5 | GLM 4.7 (quick review) | Claude Opus 4.6 (complex architecture) |
+| **Engineer** | Kimi K2.5 | GLM 4.7 (batch edits) | Claude Sonnet 4.5 (complex debugging) |
+| **DeepResearcher** | GLM 4.7 | MiniMax (quick lookup) | Kimi K2.5 (deep analysis) |
+| **GeminiResearcher** | Gemini 3 Flash | — | Gemini 3 Pro (deep research) |
+| **PerplexityResearcher** | Sonar | — | Sonar Deep Research |
+| **GrokResearcher** | Grok 4.1 Fast | — | Grok 4.1 (full analysis) |
+| **CodexResearcher** | GPT-5.1 Codex Mini | — | GPT-5.2 Codex |
+| **Writer** | Gemini 3 Flash | MiniMax (quick drafts) | Claude Sonnet 4.5 (premium copy) |
+| **Pentester** | Kimi K2.5 | GLM 4.7 (quick scan) | Claude Sonnet 4.5 (deep audit) |
+| **Intern** | MiniMax M2.1 | — | — |
+| **explore** | MiniMax M2.1 | — | — |
+| **QATester** | GLM 4.7 | — | — |
 
 #### Agent System Changes
 - **Model routing centralized** — Agent `.md` files no longer contain `model:` in frontmatter. ALL model routing now lives exclusively in `opencode.json`
-- **16 canonical agents** — Standardized agent roster (see list below)
+- **15 specialized agents** with dynamic tier routing
 - **DeepResearcher** replaces ClaudeResearcher (provider-agnostic naming)
 - **Removed** PerplexityProResearcher (redundant), researcher (lowercase duplicate)
 
@@ -23,16 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ⚠️ **If you have custom workflows referencing `ClaudeResearcher`**, update them to `DeepResearcher`
 - ⚠️ **If you have custom skills referencing `PerplexityProResearcher`**, migrate to `PerplexityResearcher` with `model_tier: standard` (Sonar Pro). Use `model_tier: advanced` only for Sonar Deep Research.
 
-#### Model Tiers
-- **Three-tier model routing** — `quick`, `standard`, `advanced` tiers per agent in `opencode.json`
-- Orchestrator selects tier based on task complexity via `model_tier` parameter
-- Backward-compatible: `model` field still works as fallback for OpenCode stable
-
-#### 3-Preset Wizard (v2.0)
-- **Simplified to 3 presets:** Anthropic Max, ZEN PAID, ZEN FREE
-- **OpenCode dev build** — Wizard now builds OpenCode from source (required for model tier support)
-- Prerequisites check: git, go, bun
-- Removed: Google, Groq, AWS Bedrock, Azure as separate wizard options
+#### 3 Configuration Presets
+- **`zen-paid`** (Recommended) — 75+ providers via Zen AI Gateway. Combine providers freely.
+- **`openrouter`** — OpenRouter routing with familiar model names.
+- **`local-ollama`** — Fully local with Ollama. Zero cloud, complete privacy.
 
 #### Provider Profiles (v3.0)
 - **New YAML format** with `default_model` + `agents` structure including `tiers`
@@ -43,8 +65,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Documentation
 - **NEW:** `ADVANCED-SETUP.md` — Guide for multi-provider research, custom models, and manual configuration
-- **Updated:** PAIAGENTSYSTEM.md with model tier guide and sanitized agent roster
-- **Updated:** README.md and INSTALL.md for new 3-preset system
+- **Updated:** PAIAGENTSYSTEM.md fully rewritten with model tier guide and dynamic routing
+- **Updated:** README.md with dynamic tier routing table and new presets
+- **47 documentation gaps** fixed across 11 files
+
+#### Image Optimization
+- All 17 images in `docs/images/` resized and compressed
+- **Total reduction: 12.4 MB → 2.6 MB (79%)**
 
 ### Breaking Changes
 - Profile YAML format changed (`models:` → `default_model:` + `agents:` with `tiers`)
@@ -76,30 +103,14 @@ agents:
       advanced: anthropic/claude-opus-4-6
 ```
 
-#### All 16 Canonical Agents
-
-| Agent | Type | Default Tier |
-|-------|------|--------------|
-| **Algorithm** | Orchestrator | Most Capable |
-| **Architect** | Design | Standard |
-| **Engineer** | Implementation | Standard |
-| **general** | Multi-step | Standard |
-| **explore** | Exploration | Budget |
-| **Intern** | Parallel work | Budget |
-| **Writer** | Content | Standard |
-| **DeepResearcher** | Research | Standard |
-| **GeminiResearcher** | Research | Standard |
-| **GrokResearcher** | Research | Standard |
-| **PerplexityResearcher** | Research | Standard |
-| **CodexResearcher** | Research | Standard |
-| **QATester** | Testing | Standard |
-| **Pentester** | Security | Standard |
-| **Designer** | UX/UI | Standard |
-| **Artist** | Visual | Standard |
+### Stats
+- **113 files changed**, 2,824 insertions, 1,792 deletions
+- **15 agents** with dynamic tier routing
+- **3 presets** ready to use
 
 ### Migration Guide
 1. Re-run the wizard: `bun run .opencode/PAIOpenCodeWizard.ts`
-2. Or switch profile manually: `bun run .opencode/tools/switch-provider.ts anthropic`
+2. Or switch profile manually: `bun run .opencode/tools/switch-provider.ts zen-paid`
 3. Custom agent models → Edit `opencode.json` agent section directly
 
 ---
@@ -335,30 +346,36 @@ This release brings full PAI 2.5 Algorithm compatibility and adds 5 new handlers
 
 ## Version Comparison
 
-| Feature | v1.0.0 | v1.1.0 |
-|---------|--------|--------|
-| PAI Version | 2.4 | **2.5** |
-| Algorithm | Basic | **Full 7-phase v0.2.25** |
-| Handlers | 8 | **13** |
-| Voice Notifications | No | **Yes** |
-| Sentiment Detection | No | **Yes** |
-| Tab State | No | **Yes** |
-| ISC Tracking | Basic | **Full with TaskCreate** |
-| Thinking Tools | No | **Yes (Council, RedTeam, etc.)** |
+| Feature | v1.0.0 | v1.1.0 | v1.2.0 | v1.2.1 | v1.3.0 |
+|---------|--------|--------|--------|--------|--------|
+| PAI Version | 2.4 | **2.5** | 2.5 | 2.5 | 2.5 |
+| Algorithm | Basic | **Full 7-phase** | Full 7-phase | Full 7-phase | Full 7-phase |
+| Handlers | 8 | **13** | 13 | 13 | 13 |
+| Agents | 14 | 14 | 14 | 18 | **15 (cleaned)** |
+| Dynamic Tier Routing | No | No | No | No | **Yes** |
+| Provider Profiles | No | No | No | **Yes (5)** | **Yes (6)** |
+| Multi-Provider Research | No | No | No | **Yes** | **Yes** |
+| Observability Dashboard | No | No | **Yes** | Yes | Yes |
+| Voice Notifications | No | **Yes** | Yes | Yes | Yes |
+| Sentiment Detection | No | **Yes** | Yes | Yes | Yes |
+| Image Optimization | No | No | No | No | **79% reduction** |
 
 ---
 
 ## Upgrade Path
 
-### From v1.0.x to v1.1.0
+### From v1.2.x to v1.3.0
 
 ```bash
 git fetch origin
 git checkout main
 git pull origin main
+bun run .opencode/PAIOpenCodeWizard.ts
 ```
 
-All new handlers are automatically available. No configuration changes needed.
+Re-running the wizard is recommended — it generates the new profile format with dynamic tier routing.
+
+**Manual alternative:** `bun run .opencode/tools/switch-provider.ts zen-paid`
 
 ### Voice Server Setup (Optional)
 
